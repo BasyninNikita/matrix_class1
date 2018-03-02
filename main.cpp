@@ -128,6 +128,12 @@ public:
 	}
 	return stream;
   };
+	~matrix_t(){ 
+	for (unsigned int i = 0; i < this->rows; i++) {
+		delete [] this->data[i];
+	}
+	delete []this->data;
+  }
   
 };
 
