@@ -96,6 +96,33 @@ public:
 				}
 				return matrix3;
 			}    
+	matrix_t(const matrix_t & matrix) {
+	this->rows = matrix.rows;
+	this->columns = matrix.columns;
+	this->data = new int *[this->rows];
+	for (unsigned int i = 0; i < this->rows; ++i) {
+			data[i] = new int[this->columns];
+			for (unsigned int j = 0; j < this->columns; ++j) {
+				this->data[i][j] = matrix.data[i][j];
+			}
+		}
+	}
+	
+	matrix_t & operator=(const matrix_t & matrix) {
+		for (unsigned int i = 0; i < rows; ++i) {
+			delete[] this->data[i];
+		}
+		delete[] this->data;
+		this->rows = matrix.rows;
+		this->columns = matrix.columns;
+		this->data = new int * [rows];
+		for (unsigned int i = 0; i < this->rows; ++i) {
+			this->data[i] = new int[this->columns];
+			for (unsigned int j = 0; j < this->columns; ++j) {
+				this->data[i][j] = matrix.data[i][j];
+			}
+		}			
+	}
 			
 	std::ifstream & read( std::ifstream & fin ) {
   	char op;
